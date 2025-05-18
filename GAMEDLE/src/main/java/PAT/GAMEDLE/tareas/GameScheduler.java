@@ -21,6 +21,6 @@ public class GameScheduler {
 
     @Scheduled(cron = "0 1 0 * * *")
     public void actualizarPalabraDelDia() {
-        wordService.fetchWordleWord();
+        wordService.wordle();
     }
 }

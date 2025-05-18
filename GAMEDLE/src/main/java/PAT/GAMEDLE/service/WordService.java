@@ -53,8 +53,10 @@ public class WordService {
 
     private String fallback() {
         return "gatos";
+    }
 
-    public void Words()
+
+    public void wordle()
     {
         Words day =new Words();
         day.date= LocalDate.now();
