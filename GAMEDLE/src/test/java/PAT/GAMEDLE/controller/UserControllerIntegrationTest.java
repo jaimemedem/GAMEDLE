@@ -56,16 +56,7 @@ class P5ApplicationE2ETest {
                 response.getBody());
     }
 
-    /**
-     * TODO#11
-     * Completa el siguiente test E2E para que verifique la
-     * respuesta de login cuando se proporcionan credenciales correctas
-     */
     @Test public void loginOkTest() {
-
-        //No puede hacerse este test, por lo menos no como está hecho el código por ahora
-        //El registro no guarda al usuario en ningún lado por ahora
-        //El login solo puede devolver error de authentication, eso es lo que compruebo
 
 
         // Given ...
