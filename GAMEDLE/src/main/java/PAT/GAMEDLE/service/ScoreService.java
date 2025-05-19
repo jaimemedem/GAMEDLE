@@ -4,6 +4,7 @@ package PAT.GAMEDLE.service;
 import PAT.GAMEDLE.entity.AppUser;
 import PAT.GAMEDLE.entity.GameScore;
 import PAT.GAMEDLE.model.ScoreRequest;
+import PAT.GAMEDLE.model.ScoreResponse;
 import PAT.GAMEDLE.repository.AppUserRepository;
 import PAT.GAMEDLE.repository.GameScoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,4 +63,8 @@ public class ScoreService {
         }
     }
 
+    public List<ScoreResponse> getAllScores(AppUser appUser) {
+        return null;
+
+    }
 }
