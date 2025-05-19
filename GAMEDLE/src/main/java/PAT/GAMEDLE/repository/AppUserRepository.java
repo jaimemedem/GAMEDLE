@@ -7,5 +7,7 @@ public interface AppUserRepository extends CrudRepository<AppUser,String> {
 
     AppUser findByEmail(String email);
 
+    AppUser findByName(String name);
+
 
 }
