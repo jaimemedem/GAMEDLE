@@ -13,6 +13,7 @@
       <ul>
         <li><a href="#inicio">Inicio</a></li>
         <li><a onclick="salir()">Salir</a></li>
+        <li><a href="wordle.html">Jugar Wordle</a></li>
       </ul>
     </nav>
   </header>
@@ -28,6 +29,14 @@
           <tr><td>Correo-e</td><td id="email-inicio"></td></tr>
         </table>
       </section>
+      <article id="wordle" hidden>
+        <section id="appWordle">
+          <!-- Aquí va el tablero, teclado, resetButton, etc. -->
+          <div id="tablero-juego"></div>
+          <div id="teclado">...teclado virtual aquí...</div>
+          <button id="resetButton">Reiniciar</button>
+        </section>
+      </article>
       <section>
         <button type="button" onclick="baja()">Darse de baja</button>
       </section>

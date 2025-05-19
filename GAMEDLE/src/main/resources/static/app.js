@@ -48,3 +48,11 @@ function form2json(event) {
   const data = new FormData(event.target);
   return JSON.stringify(Object.fromEntries(data.entries()));
 }
+
+function cargarArticulo(articulo) {
+  switch(articulo) {
+    case '#inicio': return articuloInicio();
+    case '#wordle': return Promise.resolve();
+    default: return articuloInicio();
+  }
+}
