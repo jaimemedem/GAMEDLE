@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -63,8 +64,16 @@ public class ScoreService {
         }
     }
 
-    public List<ScoreResponse> getAllScores(AppUser appUser) {
-        return null;
+    public List<ScoreResponse> getAllScores(AppUser appUser, String game) {
+        List<GameScore> scores= gameScoreRepository.findByUser(appUser);
+        List<ScoreResponse> responses= new ArrayList<>();
+        for (GameScore aux : scores)
+        {
+            ScoreResponse res = new ScoreResponse(appUser.name,game,aux.attempts_wordle,aux.success_wordle);
+            responses.add(res);
+        }
+
+        return responses;
 
     }
 }

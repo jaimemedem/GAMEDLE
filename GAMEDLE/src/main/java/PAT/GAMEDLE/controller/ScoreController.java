@@ -32,14 +32,14 @@ public class ScoreController {
 
     }
 
-    @GetMapping("api/scores")
+    @GetMapping("api/scores/{game}")
     @ResponseStatus(HttpStatus.OK)
-    public List<ScoreResponse> getMyScores(@CookieValue(value = "session", required = true) String session)
+    public List<ScoreResponse> getMyScores(@CookieValue(value = "session", required = true) String session, @PathVariable String game)
     {
 
         AppUser appUser = userService.authentication(session);
 
-        List<ScoreResponse>scores=scoreService.getAllScores(appUser);
+        List<ScoreResponse>scores=scoreService.getAllScores(appUser,game);
 
 
 

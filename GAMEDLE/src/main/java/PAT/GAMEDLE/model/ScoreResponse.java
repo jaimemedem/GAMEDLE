@@ -13,6 +13,8 @@ public record ScoreResponse(
         String gamename,
 
         @Min(0)
-        Integer attempts
+        Integer attempts,
+
+        Boolean success_wordle
 ) {
 }
