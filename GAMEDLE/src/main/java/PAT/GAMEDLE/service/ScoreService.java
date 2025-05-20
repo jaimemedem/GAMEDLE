@@ -24,10 +24,10 @@ public class ScoreService {
     AppUserRepository appUserRepository;
 
 
-    public void checkSaveScore(ScoreRequest request)
+    public void checkSaveScore(ScoreRequest request, AppUser user)
     {
 
-        List<GameScore> aux= gameScoreRepository.findByUser(appUserRepository.findByName(request.user()));
+        List<GameScore> aux= gameScoreRepository.findByUser(user);
         Boolean exists= false;
         for (GameScore score : aux)
         {
@@ -50,7 +50,7 @@ public class ScoreService {
         if(!exists)
         {
             GameScore score = new GameScore();
-            score.user= appUserRepository.findByName(request.user());
+            score.user=user;
             score.playedAt=LocalDate.now();
             if(request.gamename().equals("wordle"))
             {
@@ -73,7 +73,6 @@ public class ScoreService {
             ScoreResponse res = new ScoreResponse(appUser.name,game,aux.attempts_wordle,aux.success_wordle);
             responses.add(res);
         }
-
         return responses;
 
     }
@@ -83,18 +82,25 @@ public class ScoreService {
     public StatsResponse getStats(String game, AppUser appUser) {
 
         List<GameScore> scores = gameScoreRepository.findByUser(appUser);
-        Integer attempts =  0;
-        Integer total_success = 0;
-        for (GameScore score: scores){
-            attempts+=score.attempts_wordle;
-            if(score.success_wordle)
-            {
-                total_success +=1;
+        int attempts = 0;
+        int total_success = 0;
+        int count = 0;
+
+        if (scores != null && !scores.isEmpty()) {
+            for (GameScore score : scores) {
+                count++;
+                attempts += score.attempts_wordle;
+                if (score.success_wordle != null && score.success_wordle) {
+                    total_success++;
+                }
+            }
+            if (count > 0) {
+                float attempts_pg = (float) attempts / count;
+                float success_rate = (float) total_success / count;
+                return new StatsResponse(appUser.name, game, attempts_pg, success_rate);
             }
         }
-        Float attempts_pg = (float) (attempts/scores.toArray().length);
-        Float success_rate = (float) (total_success/scores.toArray().length);
-        return new StatsResponse(appUser.name, game,attempts_pg,success_rate);
+        return null;
 
     }
 
@@ -113,7 +119,7 @@ public class ScoreService {
     }
 
 
-            public List<StatsResponse> getLeaderBoard(String game) {
+    public List<StatsResponse> getLeaderBoard(String game) {
         List<StatsResponse> stats = new ArrayList<>();
         List<AppUser> users = (List<AppUser>) appUserRepository.findAll();
         for (AppUser user : users)
