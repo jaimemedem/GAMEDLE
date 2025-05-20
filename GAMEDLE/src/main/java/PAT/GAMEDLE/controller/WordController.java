@@ -30,7 +30,7 @@ public class WordController {
         return wordService.getWordle(null);
     }
 
-    @GetMapping("api/wordle/{date}")
+    @GetMapping("api/wordle/bydate/{date}")
     @ResponseStatus(HttpStatus.OK)
     //para consultar palabras de otras fechas
     public WordleResponse getWordleFrom(@PathVariable String date)
