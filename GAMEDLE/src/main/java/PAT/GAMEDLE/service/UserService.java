@@ -7,7 +7,6 @@ import PAT.GAMEDLE.model.ProfileResponse;
 import PAT.GAMEDLE.model.RegisterRequest;
 import PAT.GAMEDLE.repository.AppUserRepository;
 import PAT.GAMEDLE.repository.TokenRepository;
-import PAT.GAMEDLE.util.Hashing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
