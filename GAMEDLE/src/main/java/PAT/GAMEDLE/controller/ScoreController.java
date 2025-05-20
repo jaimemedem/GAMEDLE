@@ -44,7 +44,7 @@ public class ScoreController {
 
         List<ScoreResponse>scores=scoreService.getAllScores(appUser,game);
 
-        return null;
+        return scores;
     }
 
     @GetMapping("api/{game}/stats")

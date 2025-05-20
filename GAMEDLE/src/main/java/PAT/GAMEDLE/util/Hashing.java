@@ -1,4 +1,4 @@
-package PAT.GAMEDLE.util;
+    package PAT.GAMEDLE.util;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
