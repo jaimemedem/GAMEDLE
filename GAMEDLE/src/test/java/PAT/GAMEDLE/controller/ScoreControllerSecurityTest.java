@@ -25,9 +25,7 @@ import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-/**
- * Pruebas de autorización (401/403) y flujo básico (200/201) para ScoreController.
- */
+
 @WebMvcTest(ScoreController.class)
 class ScoreControllerSecurityTest {
 

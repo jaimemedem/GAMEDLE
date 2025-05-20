@@ -36,16 +36,12 @@ public class ScoreController {
     @GetMapping("api/{game}/scores")
     @ResponseStatus(HttpStatus.OK)
     // Para ver tus resultados como jugador
-    public List<ScoreResponse> getMyScores(
-            @CookieValue(value = "session", required = true) String session,
-            @PathVariable String game) {
+    public List<ScoreResponse> getMyScores(@CookieValue(value = "session", required = true) String session, @PathVariable String game) {
 
-        
 
-        List<ScoreResponse>scores=scoreService.getAllScores(appUser,game);
+        List<ScoreResponse>scores=scoreService.getAllScores(userService.authentication(session),game);
 
         return scores;
-        development
     }
 
     @GetMapping("api/{game}/stats")
