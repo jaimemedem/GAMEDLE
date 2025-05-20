@@ -1,50 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>App</title>
-  <script src="app.js"></script>
-  <link rel="stylesheet" type="text/css" href="app.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GAMEDLE Dashboard</title>
+  <link rel="stylesheet" href="app.css" />
+  <link rel="stylesheet" href="wordle.css" />
 </head>
-<body onload="inicializar()">
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#inicio">Inicio</a></li>
-        <li><a onclick="salir()">Salir</a></li>
-        <li><a href="wordle.html">Jugar Wordle</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main>
-    <article id="inicio">
-      <section>
-        Bienvenido,
-        <span id="nombre-inicio"></span>
-      </section>
-      <section>
-        <table>
-          <tr><td>Rol</td><td id="tel-inicio"></td></tr>
-          <tr><td>Correo-e</td><td id="email-inicio"></td></tr>
-        </table>
-      </section>
-      <article id="wordle" hidden>
-        <section id="appWordle">
-          <!-- Aquí va el tablero, teclado, resetButton, etc. -->
-          <div id="tablero-juego"></div>
-          <div id="teclado">...teclado virtual aquí...</div>
-          <button id="resetButton">Reiniciar</button>
-        </section>
-      </article>
-      <section>
-        <button type="button" onclick="baja()">Darse de baja</button>
-      </section>
-    </article>
-  </main>
-  <footer>
-    Práctica 5 © PAT
-    <script>document.write(new Date().getFullYear());</script>
-  </footer>
+<body>
+<header>
+  <nav>
+    <ul>
+      <li><a href="#inicio" id="link-inicio">Inicio</a></li>
+      <li><a href="#wordle" id="link-wordle">Wordle</a></li>
+      <li style="margin-left:auto">
+        <button id="btn-logout">Salir</button>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <!-- PERFIL -->
+  <section id="inicio">
+    <h2>Bienvenido, <span id="nombre-inicio"></span></h2>
+    <table>
+      <tr><th>Rol:</th><td id="rol-inicio"></td></tr>
+      <tr><th>Correo-e:</th><td id="email-inicio"></td></tr>
+    </table>
+    <button id="btn-unsubscribe">Darse de baja</button>
+  </section>
+
+  <!-- WORDLE -->
+  <section id="wordle" hidden>
+    <h2>Wordle</h2>
+    <div id="tablero-juego"></div>
+    <div id="teclado"></div>
+    <button id="resetButton">Reiniciar</button>
+  </section>
+</main>
+
+<footer>
+  GAMEDLE © <span id="year"></span>
+</footer>
+
+<!-- Scripts: carga primero la lógica de Wordle, luego la SPA -->
+<script src="wordle.js" defer></script>
+<script src="app.js" defer></script>
+<script>
+  // actualiza el año
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>

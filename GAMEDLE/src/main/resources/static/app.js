@@ -1,58 +1,72 @@
-function datosPerfil() {
-  return fetch('/api/users/me').then(res => res.json());
-}
+document.addEventListener('DOMContentLoaded', () => {
+  setupNav();
+  loadSection(location.hash || '#inicio');
+});
 
-function articuloInicio() {
-  return datosPerfil().then(perfil => {
-    document.getElementById('nombre-inicio').textContent = perfil.name;
-    document.getElementById('tel-inicio').textContent = perfil.role;
-    document.getElementById('email-inicio').textContent = perfil.email;
+window.addEventListener('hashchange', () => {
+  loadSection(location.hash);
+});
+
+function setupNav() {
+  // Logout
+  document.getElementById('btn-logout')
+    .addEventListener('click', () => {
+      fetch('/api/users/me/session', { method: 'DELETE' })
+        .then(() => window.location = 'login.html');
+    });
+
+  // Unsubscribe
+  document.getElementById('btn-unsubscribe')
+    .addEventListener('click', () => {
+      if (confirm('¿Seguro que quieres darte de baja?')) {
+        fetch('/api/users/me', { method: 'DELETE' })
+          .then(() => window.location = 'login.html');
+      }
+    });
+
+  // Navegación
+  ['link-inicio', 'link-wordle'].forEach(id => {
+    const el = document.getElementById(id);
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      location.hash = el.getAttribute('href');
+    });
   });
 }
 
-function salir() {
-  fetch('/api/users/me/session', {method: 'delete'})
-    .then(() => location.href = 'login.html');
+function fetchProfile() {
+  return fetch('/api/users/me')
+    .then(res => res.json());
 }
 
-function baja() {
-  if (confirm("Esto borrará tu usuario, ¿estás seguro?")) {
-    fetch('/api/users/me', {method: 'delete'})
-      .then(() => location.href = 'login.html');
-  }
+function showProfile() {
+  return fetchProfile().then(profile => {
+    document.getElementById('nombre-inicio').textContent = profile.name;
+    document.getElementById('rol-inicio').textContent = profile.role;
+    document.getElementById('email-inicio').textContent = profile.email;
+  });
 }
 
-addEventListener('hashchange', inicializar);
+function loadSection(hash) {
+  // oculta todas
+  document.querySelectorAll('main > section')
+    .forEach(s => s.hidden = true);
 
-function inicializar() {
-  Array.from(document.querySelectorAll('article')).forEach(a => a.hidden = true);
-  Array.from(document.querySelectorAll('nav a')).forEach(a => a.classList.remove('active'));
-  const articulo = location.hash || "#inicio";
-  cargarArticulo(articulo).then(() => mostrarArticulo(articulo));
-}
+  // marca activo
+  document.querySelectorAll('nav a')
+    .forEach(a => a.classList.toggle('active',
+      a.getAttribute('href') === hash));
 
-function cargarArticulo(articulo) {
-  switch(articulo) {
-    case '#inicio': return articuloInicio();
-    default: return articuloInicio();
-  }
-}
+  // muestra la pedida
+  const sec = document.querySelector(hash);
+  if (!sec) return;
+  sec.hidden = false;
 
-function mostrarArticulo(articulo) {
-  document.querySelector(articulo).hidden = false;
-  document.querySelector(`a[href="${articulo}"]`).classList.add('active');
-}
-
-function form2json(event) {
-  event.preventDefault();
-  const data = new FormData(event.target);
-  return JSON.stringify(Object.fromEntries(data.entries()));
-}
-
-function cargarArticulo(articulo) {
-  switch(articulo) {
-    case '#inicio': return articuloInicio();
-    case '#wordle': return Promise.resolve();
-    default: return articuloInicio();
+  if (hash === '#inicio') {
+    showProfile();
+  } else if (hash === '#wordle' && typeof initWordle === 'function') {
+    initWordle();
+    document.getElementById('resetButton')
+      .addEventListener('click', resetWordle);
   }
 }
