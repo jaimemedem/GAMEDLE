@@ -30,4 +30,3 @@ EXPOSE 8080
 
 # Arrancamos la app
 ENTRYPOINT ["java","-jar","/app/app.jar"]
--jar","/app.jar"]
