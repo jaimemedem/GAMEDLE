@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>App</title>
+  <link rel="stylesheet" type="text/css" href="app.css" />
+  <script src="app.js" defer></script>
+</head>
+<body onload="inicializar()">
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a onclick="salir()">Salir</a></li>
+        <li><a href="wordle.html">Jugar Wordle</a></li>
+        <li><a href="scores.html">Ver mis Scores</a><li>
+        <li><a href="#leaderboard">Leaderboard</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <article id="inicio">
+      <section>
+        Bienvenido,
+        <span id="nombre-inicio"></span>
+      </section>
+      <section>
+        <table>
+          <tr><td>Rol</td><td id="tel-inicio"></td></tr>
+          <tr><td>Correo-e</td><td id="email-inicio"></td></tr>
+        </table>
+      </section>
+      <article id="wordle" hidden>
+        <section id="appWordle">
+
+          <div id="tablero-juego"></div>
+          <div id="teclado">...teclado virtual aquí...</div>
+          <button id="resetButton">Reiniciar</button>
+        </section>
+      </article>
+      <section>
+        <button type="button" onclick="baja()">Darse de baja</button>
+      </section>
+    </article>
+    <article id="leaderboard" hidden>
+    <section>
+      <h2>Leaderboard</h2>
+      <table id="leaderboardTable">
+        <thead>
+        <tr>
+          <th>Posición</th>
+          <th>Usuario</th>
+          <th>% Éxitos</th>
+          <th>Partidas</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </article>
+  </main>
+  <footer>
+    Wordle
+    <script>document.write(new Date().getFullYear());</script>
+  </footer>
+</body>
+</html>

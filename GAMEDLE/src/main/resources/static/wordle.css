@@ -1,0 +1,134 @@
+/* Estilo básico para cuerpo y encabezado */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+header {
+    padding: 15px;
+    background-color: #ddd;
+}
+
+/* Tablero de juego */
+#tablero-juego {
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fila-letras {
+    display: flex;
+    margin: 4px;
+}
+
+.caja-letra {
+    border: 1px solid #999;
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+    font-size: 2rem;
+    line-height: 50px;
+    text-transform: uppercase;
+}
+
+.letra-rellena {
+    border-color: #000;
+}
+
+/* Estilo para el teclado virtual */
+#teclado {
+    margin: 10px auto;
+}
+
+.fila-tecla {
+    margin: 5px 0;
+}
+
+.tecla {
+    padding: 8px 12px;
+    margin: 3px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    background-color: #ccc;
+    text-transform: uppercase;
+}
+
+.modal {
+    display: block;
+    /* Se muestra por defecto al cargar */
+    position: fixed;
+    z-index: 1000;
+
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fondo negro semitransparente */
+}
+
+.wordleReturnButton {
+    background-color: #4CAF50; /* color verde */
+    color: white; /* texto blanco */
+    padding: 12px 24px; /* espacio interno */
+    border: none; /* sin borde */
+    border-radius: 8px; /* esquinas redondeadas */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* efecto hover suave */
+  }
+
+ .wordleReturnButton:hover {
+    background-color: #45a049;
+  }
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    /* Centrado vertical y horizontal */
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+    text-align: left;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+}
+
+/* Animación sencilla para las celdas */
+.animar-celda {
+    animation: rebote 0.3s ease;
+}
+
+@keyframes rebote {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
