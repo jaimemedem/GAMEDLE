@@ -46,6 +46,4 @@ class RegisterRequestUnitTest {
         assertFalse(violations.isEmpty());
     }
 
-
-
 }
