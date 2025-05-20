@@ -123,7 +123,7 @@ class ScoreControllerSecurityTest {
     @Test
     @DisplayName("POST /api/score/wordle → 201 crea puntuación sin cookie")
     void whenPostScore_withoutSession_thenCreated() throws Exception {
-        ScoreRequest req = new ScoreRequest("user1", GAME, 3);
+        ScoreRequest req = new ScoreRequest( GAME, 3);
         // No se lanza excepción => debería devolver CREATED
         mvc.perform(post("/api/score/wordle")
                         .contentType(MediaType.APPLICATION_JSON)
