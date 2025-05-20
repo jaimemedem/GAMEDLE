@@ -7,7 +7,6 @@ import PAT.GAMEDLE.model.StatsResponse;
 import PAT.GAMEDLE.service.ScoreService;
 import PAT.GAMEDLE.service.UserService;
 import jakarta.validation.Valid;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +18,10 @@ import java.util.List;
 public class ScoreController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    ScoreService scoreService;
+    private ScoreService scoreService;
 
     @PostMapping("api/score/wordle")
     @ResponseStatus(HttpStatus.CREATED)
@@ -32,38 +31,38 @@ public class ScoreController {
         AppUser user= userService.authentication(session);
         scoreService.checkSaveScore(request,user);
         return new ResponseEntity<>(HttpStatus.CREATED);
-
     }
 
     @GetMapping("api/{game}/scores")
     @ResponseStatus(HttpStatus.OK)
-    //para ver tus resultados como jugador
-    public List<ScoreResponse> getMyScores(@CookieValue(value = "session", required = true) String session, @PathVariable String game)
-    {
+    // Para ver tus resultados como jugador
+    public List<ScoreResponse> getMyScores(
+            @CookieValue(value = "session", required = true) String session,
+            @PathVariable String game) {
 
-        AppUser appUser = userService.authentication(session);
+        
+
         List<ScoreResponse>scores=scoreService.getAllScores(appUser,game);
 
         return scores;
+        development
     }
 
     @GetMapping("api/{game}/stats")
     @ResponseStatus(HttpStatus.OK)
-    //ver tus estadísticas y promedios como jugador
-    public StatsResponse getMyStats(@CookieValue(value = "session", required = true) String session, @PathVariable String game)
-    {
-        return scoreService.getStats(game, userService.authentication(session));
+    // Ver tus estadísticas y promedios como jugador
+    public StatsResponse getMyStats(
+            @CookieValue(value = "session", required = true) String session,
+            @PathVariable String game) {
+
+        AppUser appUser = userService.authentication(session);
+        return scoreService.getStats(game, appUser);
     }
 
     @GetMapping("api/{game}/stats/leaderboard")
     @ResponseStatus(HttpStatus.OK)
-    //Ver las mejores estadíasticas
-    public List<StatsResponse> getLeaderBoard(@PathVariable String game)
-    {
+    // Ver las mejores estadísticas
+    public List<StatsResponse> getLeaderBoard(@PathVariable String game) {
         return scoreService.getLeaderBoard(game);
     }
-
-
-
-
 }

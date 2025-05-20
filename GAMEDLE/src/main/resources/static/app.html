@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>App</title>
-  <script src="app.js"></script>
   <link rel="stylesheet" type="text/css" href="app.css" />
+  <script src="app.js" defer></script>
 </head>
 <body onload="inicializar()">
   <header>
@@ -15,6 +15,7 @@
         <li><a onclick="salir()">Salir</a></li>
         <li><a href="wordle.html">Jugar Wordle</a></li>
         <li><a href="scores.html">Ver mis Scores</a><li>
+        <li><a href="#leaderboard">Leaderboard</a></li>
       </ul>
     </nav>
   </header>
@@ -42,6 +43,22 @@
         <button type="button" onclick="baja()">Darse de baja</button>
       </section>
     </article>
+    <article id="leaderboard" hidden>
+    <section>
+      <h2>Leaderboard</h2>
+      <table id="leaderboardTable">
+        <thead>
+        <tr>
+          <th>Posición</th>
+          <th>Usuario</th>
+          <th>% Éxitos</th>
+          <th>Partidas</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </article>
   </main>
   <footer>
     Wordle
