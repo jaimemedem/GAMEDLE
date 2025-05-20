@@ -1,14 +1,14 @@
 INSERT INTO app_user (id, email, password, rol, name) VALUES
 ('8f1b7e1f-5d67-4d3e-9c0a-4c547a9c1510', 'admin@gamedle.com',   'admin123',   'ADMIN', 'Super Admin'),
-('1b2c3d4e-5f60-4a11-8899-0abcde123456', 'juan@gamedle.com',    'passJuan',   'USER',  'Juan Pérez'),
-('2c3d4e5f-6172-4b22-99aa-1bcdef234567', 'maria@gamedle.com',   'passMaria',  'USER',  'María López'),
-('3d4e5f60-7283-4c33-aabb-2cdef3456789', 'lucas@gamedle.com',   'passLucas',  'USER',  'Lucas García'),
-('4e5f6071-8394-4d44-bbcc-3def4567890a', 'ana@gamedle.com',     'passAna',    'USER',  'Ana Sánchez'),
-('5f607182-94a5-4e55-ccdd-4ef567890ab1', 'sofia@gamedle.com',   'passSofia',  'USER',  'Sofía Ramírez'),
-('60718293-a5b6-4f66-ddee-5f67890abc12', 'carlos@gamedle.com',  'passCarlos', 'USER',  'Carlos Díaz'),
-('718293a4-b6c7-5077-eeff-67890abcd123', 'paula@gamedle.com',   'passPaula',  'USER',  'Paula Ruiz'),
-('8293a4b5-c7d8-5188-ff00-7890bcde2345', 'david@gamedle.com',   'passDavid',  'USER',  'David Molina'),
-('93a4b5c6-d8e9-5299-0011-890cdef34567', 'laura@gamedle.com',   'passLaura',  'USER',  'Laura Gómez');
+('1b2c3d4e-5f60-4a11-8899-0abcde123456', 'juan@gamedle.com',    'passJuan123',   'USER',  'Juan Pérez'),
+('2c3d4e5f-6172-4b22-99aa-1bcdef234567', 'maria@gamedle.com',   'passMaria123',  'USER',  'María López'),
+('3d4e5f60-7283-4c33-aabb-2cdef3456789', 'lucas@gamedle.com',   'passLucas123',  'USER',  'Lucas García'),
+('4e5f6071-8394-4d44-bbcc-3def4567890a', 'ana@gamedle.com',     'passAna123',    'USER',  'Ana Sánchez'),
+('5f607182-94a5-4e55-ccdd-4ef567890ab1', 'sofia@gamedle.com',   'passSofia123',  'USER',  'Sofía Ramírez'),
+('60718293-a5b6-4f66-ddee-5f67890abc12', 'carlos@gamedle.com',  'passCarlos123', 'USER',  'Carlos Díaz'),
+('718293a4-b6c7-5077-eeff-67890abcd123', 'paula@gamedle.com',   'passPaula123',  'USER',  'Paula Ruiz'),
+('8293a4b5-c7d8-5188-ff00-7890bcde2345', 'david@gamedle.com',   'passDavid123',  'USER',  'David Molina'),
+('93a4b5c6-d8e9-5299-0011-890cdef34567', 'laura@gamedle.com',   'passLaura123',  'USER',  'Laura Gómez');
 
 
 INSERT INTO game_score (id, user_id, played_at, attempts_wordle, success_wordle) VALUES

@@ -7,7 +7,6 @@ import PAT.GAMEDLE.model.ProfileResponse;
 import PAT.GAMEDLE.model.RegisterRequest;
 import PAT.GAMEDLE.repository.AppUserRepository;
 import PAT.GAMEDLE.repository.TokenRepository;
-import PAT.GAMEDLE.util.Hashing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -18,17 +17,15 @@ public class UserService{
     @Autowired
     private AppUserRepository userRepository;
     @Autowired private TokenRepository tokenRepository;
-    @Autowired private Hashing hashing;
 
 
     public Token login(String email, String password) {
         AppUser appUser = userRepository.findByEmail(email);
         if (appUser == null) return null;
-        if (!hashing.compare(appUser.password, password)) return null;
+        if (appUser.password == password) return null;
         Token token = tokenRepository.findByAppUser(appUser);
         if (token == null) {
             token = new Token();
-
 
             token.appUser = appUser;
 
@@ -56,7 +53,7 @@ public class UserService{
         user.name     = register.name();
         user.email    = register.email();
         user.rol      = register.role();
-        user.password = hashing.hash(register.password());
+        user.password = register.password();
 
         try {
 
@@ -79,7 +76,7 @@ public class UserService{
     public ProfileResponse profile(AppUser appUser, ProfileRequest profile) {
         appUser.name     = profile.name();
         appUser.rol      = profile.role();
-        appUser.password = hashing.hash(profile.password());
+        appUser.password = profile.password();
 
         userRepository.save(appUser);
 
