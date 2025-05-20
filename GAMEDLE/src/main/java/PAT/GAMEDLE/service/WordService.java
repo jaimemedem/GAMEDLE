@@ -54,15 +54,13 @@ public class WordService {
     }
 
 
-    public void wordle()
-    {
+    public void wordle() {
 
-        Words day =new Words();
-        day.date= LocalDate.now();
-        day.wordle_word=fetchWordleWord();
-        Words aux =wordsRepository.findByDate(LocalDate.now());
-        if (aux!=null)
-        {
+        Words day = new Words();
+        day.date = LocalDate.now();
+        day.wordle_word = fetchWordleWord();
+        Words aux = wordsRepository.findByDate(LocalDate.now());
+        if (aux != null) {
             wordsRepository.delete(aux);
 
         }
@@ -70,20 +68,29 @@ public class WordService {
         wordsRepository.save(day);
     }
 
-    public WordleResponse getWordle(LocalDate date)
-    {
-        if(date==null)
-        {
-            Words word=wordsRepository.findByDate(LocalDate.now());
+    public WordleResponse getWordle(LocalDate date) {
+        if (date == null) {
+            Words word = wordsRepository.findByDate(LocalDate.now());
             return new WordleResponse(word.wordle_word);
 
-        }else {
-            Words word=wordsRepository.findByDate(date);
+        } else {
+            Words word = wordsRepository.findByDate(date);
             return new WordleResponse(word.wordle_word);
 
         }
     }
 
+    public WordleResponse changeWordle(String word) {
+        Words palabra = wordsRepository.findByDate(LocalDate.now());
+        wordsRepository.deleteById(palabra.id);
+        palabra.wordle_word=word;
+        wordsRepository.save(palabra);
+
+        WordleResponse response = new WordleResponse(palabra.wordle_word);
+
+        return response;
+
+    }
 
 
 }

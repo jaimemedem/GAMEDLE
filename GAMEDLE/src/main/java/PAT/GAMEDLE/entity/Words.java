@@ -8,8 +8,8 @@ import java.time.LocalDate;
 @Entity
 public class Words {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    public String id;
 
     @Column
     public LocalDate date;

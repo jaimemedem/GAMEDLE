@@ -3,6 +3,7 @@ package PAT.GAMEDLE.controller;
 import PAT.GAMEDLE.entity.AppUser;
 import PAT.GAMEDLE.model.ScoreRequest;
 import PAT.GAMEDLE.model.ScoreResponse;
+import PAT.GAMEDLE.model.StatsResponse;
 import PAT.GAMEDLE.service.ScoreService;
 import PAT.GAMEDLE.service.UserService;
 import jakarta.validation.Valid;
@@ -25,6 +26,7 @@ public class ScoreController {
 
     @PostMapping("api/score/wordle")
     @ResponseStatus(HttpStatus.CREATED)
+    //cuando se complete el wordle, se hace un post para que el servidor guarde tus estadísticas
     public ResponseEntity<Void> scoreWordle(@Valid @RequestBody  ScoreRequest request)
     {
         scoreService.checkSaveScore(request);
@@ -32,8 +34,9 @@ public class ScoreController {
 
     }
 
-    @GetMapping("api/scores/{game}")
+    @GetMapping("api/{game}/scores")
     @ResponseStatus(HttpStatus.OK)
+    //para ver tus resultados como jugador
     public List<ScoreResponse> getMyScores(@CookieValue(value = "session", required = true) String session, @PathVariable String game)
     {
 
@@ -41,9 +44,26 @@ public class ScoreController {
 
         List<ScoreResponse>scores=scoreService.getAllScores(appUser,game);
 
-
-
         return null;
     }
+
+    @GetMapping("api/{game}/stats")
+    @ResponseStatus(HttpStatus.OK)
+    //ver tus estadísticas y promedios como jugador
+    public StatsResponse getMyStats(@CookieValue(value = "session", required = true) String session, @PathVariable String game)
+    {
+        return scoreService.getStats(game, userService.authentication(session));
+    }
+
+    @GetMapping("api/{game}/stats/leaderboard")
+    @ResponseStatus(HttpStatus.OK)
+    //Ver las mejores estadíasticas
+    public List<StatsResponse> getLeaderBoard(@PathVariable String game)
+    {
+        return scoreService.getLeaderBoard(game);
+    }
+
+
+
 
 }
