@@ -12,7 +12,7 @@ public record ScoreResponse(
         @NotBlank
         String gamename,
 
-        @Min(0)
+        @Min(1)
         Integer attempts,
 
         Boolean success_wordle

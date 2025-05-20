@@ -27,9 +27,10 @@ public class ScoreController {
     @PostMapping("api/score/wordle")
     @ResponseStatus(HttpStatus.CREATED)
     //cuando se complete el wordle, se hace un post para que el servidor guarde tus estadísticas
-    public ResponseEntity<Void> scoreWordle(@Valid @RequestBody  ScoreRequest request)
+    public ResponseEntity<Void> scoreWordle(@CookieValue(value = "session", required = true) String session, @Valid @RequestBody ScoreRequest request)
     {
-        scoreService.checkSaveScore(request);
+        AppUser user= userService.authentication(session);
+        scoreService.checkSaveScore(request,user);
         return new ResponseEntity<>(HttpStatus.CREATED);
 
     }
@@ -41,10 +42,9 @@ public class ScoreController {
     {
 
         AppUser appUser = userService.authentication(session);
-
         List<ScoreResponse>scores=scoreService.getAllScores(appUser,game);
 
-        return null;
+        return scores;
     }
 
     @GetMapping("api/{game}/stats")

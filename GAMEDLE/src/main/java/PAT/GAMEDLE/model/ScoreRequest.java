@@ -5,14 +5,12 @@ import jakarta.validation.constraints.NegativeOrZero;
 import jakarta.validation.constraints.NotBlank;
 
 public record ScoreRequest(
-        @NotBlank
-        String user,
 
         @NotBlank
         String gamename,
 
 
-        @Min(0)
+        @Min(1)
         Integer attempts
 
 ) {

@@ -74,6 +74,21 @@ header {
     /* Fondo negro semitransparente */
 }
 
+.wordleReturnButton {
+    background-color: #4CAF50; /* color verde */
+    color: white; /* texto blanco */
+    padding: 12px 24px; /* espacio interno */
+    border: none; /* sin borde */
+    border-radius: 8px; /* esquinas redondeadas */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* efecto hover suave */
+  }
+
+ .wordleReturnButton:hover {
+    background-color: #45a049;
+  }
+
 .modal-content {
     background-color: #fff;
     margin: 10% auto;
