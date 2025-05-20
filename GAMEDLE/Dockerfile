@@ -4,16 +4,18 @@
 FROM eclipse-temurin:21-jdk-jammy AS builder
 WORKDIR /workspace
 
-# Copiamos el POM, el wrapper y la carpeta .mvn
-COPY pom.xml mvnw ./
-COPY .mvn .mvn
+# 1) Copiamos pom + wrapper desde la subcarpeta GAMEDLE
+COPY GAMEDLE/pom.xml GAMEDLE/mvnw ./
+COPY GAMEDLE/.mvn .mvn
 
-# Preparamos el wrapper + dependencias offline
+# 2) Preparamos el Maven Wrapper offline
 RUN chmod +x mvnw \
  && ./mvnw dependency:go-offline -B
 
-# Copiamos todo el código fuente y empaquetamos sin tests
-COPY src src
+# 3) Copiamos el código fuente (toda la carpeta src) desde GAMEDLE/src
+COPY GAMEDLE/src src
+
+# 4) Empaquetamos sin tests
 RUN ./mvnw clean package -DskipTests -B
 
 # ----------------------------
@@ -22,11 +24,9 @@ RUN ./mvnw clean package -DskipTests -B
 FROM eclipse-temurin:21-jdk-jammy
 WORKDIR /app
 
-# Copiamos el JAR ya construido
+# 5) Copiamos el JAR resultante
 COPY --from=builder /workspace/target/GAMEDLE-0.0.1-SNAPSHOT.jar app.jar
 
-# Puerto que usa Spring Boot por defecto
+# 6) Exponemos el puerto y arrancamos
 EXPOSE 8080
-
-# Arrancamos la aplicación
 ENTRYPOINT ["java","-jar","/app/app.jar"]
