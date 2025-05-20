@@ -3,7 +3,8 @@ package PAT.GAMEDLE.entity;
 import PAT.GAMEDLE.model.Role;
 import jakarta.persistence.*;
 
-@Entity
+@Entity(name="APP_USER")
+@Table(name="APP_USER")
 public class AppUser {
 
     @Id
@@ -13,7 +14,7 @@ public class AppUser {
 
     @Column (nullable = false) public String password;
 
-    @Column (nullable = false) public Role rol;
+    @Enumerated(EnumType.STRING) @Column (nullable = false) public Role rol;
 
     @Column (nullable = false) public String name;
 }

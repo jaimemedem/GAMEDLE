@@ -1,4 +1,3 @@
-
 const maxIntentos = 6;
 let intentosRestantes = maxIntentos;
 let intentoActual = [];
