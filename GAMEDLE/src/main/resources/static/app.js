@@ -17,13 +17,13 @@ function articuloInicio() {
 
 function salir() {
   fetch('/api/users/me/session', { method: 'DELETE', credentials: 'include' })
-    .then(() => location.href = 'login.html');
+    .then(() => location.href = 'index.html');
 }
 
 function baja() {
   if (confirm("Esto borrará tu usuario, ¿estás seguro?")) {
     fetch('/api/users/me', { method: 'DELETE', credentials: 'include' })
-      .then(() => location.href = 'login.html');
+      .then(() => location.href = 'index.html');
   }
 }
 

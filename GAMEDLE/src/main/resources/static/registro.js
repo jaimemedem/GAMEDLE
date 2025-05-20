@@ -11,7 +11,7 @@ function registrarUsuario(datosJsonFormulario) {
   if (!compruebaPass()) return;
   fetch('/api/users', {method: 'post', body: datosJsonFormulario, headers: {'content-type': 'application/json'}})
     .then(response => {
-      if (response.ok) location.href = 'login.html?registrado';
+      if (response.ok) location.href = 'index.html?registrado';
       else if (response.status === 409) mostrarAviso('✖︎ Usuario ya registrado', 'error');
       else mostrarAviso('✖︎ Error en el registro', 'error');
     });
