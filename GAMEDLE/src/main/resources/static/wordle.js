@@ -1,4 +1,3 @@
-
 const maxIntentos = 6;
 let intentosRestantes = maxIntentos;
 let intentoActual = [];
@@ -82,10 +81,34 @@ async function verificarPalabra() {
             colorearTecla(letra, colorLetra);
         }, 250 * i);
     }
-
     if (palabraIngresada === palabraSecreta) {
         toastr.success("¡Ganaste!");
         intentosRestantes = 0;
+        const scoreData = {
+                      gamename: "Wordle",
+                      attempts: 5
+                    };
+                    const options = {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify(scoreData)
+                    };
+
+        const url = 'http://localhost:8080/api/score/wordle';
+                    fetch(url, options)
+                      .then(response => {
+                        if (response.ok) {
+                          console.log('Score registrado exitosamente');
+                        } else {
+                          console.error('Error al registrar score:', response.status);
+                        }
+                      })
+                      .catch(error => {
+                        console.error('Error:', error);
+                      });
+
         return;
     } else {
         intentosRestantes--;
@@ -93,6 +116,31 @@ async function verificarPalabra() {
         posLetra = 0;
         if (intentosRestantes === 0) {
             toastr.error("Se acabaron los intentos. La palabra era: " + palabraSecreta);
+            const scoreData = {
+              gamename: "Wordle",
+              attempts: 5
+            };
+            const options = {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(scoreData)
+            };
+
+            const url = 'http://localhost:8080/api/score/wordle';
+            fetch(url, options)
+              .then(response => {
+                if (response.ok) {
+                  console.log('Score registrado exitosamente');
+                } else {
+                  console.error('Error al registrar score:', response.status);
+                }
+              })
+              .catch(error => {
+                console.error('Error:', error);
+              });
+
         }
     }
 }

@@ -10,12 +10,11 @@
 </head>
 <body>
   <header>
-    <h1>Palabradle</h1>
+    <h1>Wordle</h1>
   </header>
   <main>
-    <!-- Tablero donde se mostrará cada intento -->
+
     <section id="tablero-juego"></section>
-    <!-- Contenedor del teclado virtual -->
     <section id="teclado">
       <div class="fila-tecla">
         <button class="tecla">q</button>
@@ -60,19 +59,21 @@
             <span class="close-button" id="cerrarModal">&times;</span>
             <h2>¿Cómo jugar?</h2>
             <p>
-                ¡¡Bienvenido a 🟥🟨🟥Palabradle🟥🟨🟥!! <br>
-                El objetivo es adivinar la palabra secreta en 6 intentos.
-                Después de cada intento, las casillas se colorearán: 🟩verde indica que la letra está en la posición correcta,
-                🟨amarillo que la letra está en la palabra pero en otra posición y ✖️gris que la letra no forma parte de la
-                palabra.
+              Welcome to Wordle!!
+              The goal is to guess the secret word in 6 attempts.
+              After each guess, the tiles will change color:
+              - 🟩 Green: The letter is in the correct position.
+              - 🟨 Yellow: The letter is in the word but in the wrong position.
+              - ✖️ Gray: The letter is not part of the word.
             </p>
         </div>
     </div>
-    
+    <a id="wordleReturnButton" href="app.html">Return to App</a>
+
+
   </main>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-  <!-- Se carga como módulo para soportar importaciones -->
   <script type="module" src="wordle.js"></script>
 </body>
 </html>

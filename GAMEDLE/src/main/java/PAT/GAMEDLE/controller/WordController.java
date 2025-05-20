@@ -28,15 +28,15 @@ public class WordController {
     public WordleResponse conseguirWordle()
     {
         return wordService.getWordle(null);
-
     }
 
-    @GetMapping("api/wordle")
+    @GetMapping("api/wordle/bydate/{date}")
     @ResponseStatus(HttpStatus.OK)
     //para consultar palabras de otras fechas
-    public WordleResponse getWordleFrom(@RequestBody LocalDate date)
+    public WordleResponse getWordleFrom(@PathVariable String date)
     {
-        return wordService.getWordle(date);
+        LocalDate fecha = LocalDate.parse(date);
+        return wordService.getWordle(fecha);
     }
 
     @PutMapping("api/wordle/change")
@@ -50,7 +50,6 @@ public class WordController {
         }else{
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
-
     }
 
 
